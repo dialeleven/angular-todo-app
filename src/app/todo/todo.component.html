@@ -1,1 +1,104 @@
-<p>todo works! this is in /src/app/todo</p>
+<p>todo works! this is in /src/app/todo/todo.component.html</p>
+<div class="container">
+   <div class="header">
+      <button class="top-add-todo-button" click="handleShow('Add', null)">Add Todo</button>
+
+      <!-- <TodoListHero :completedTasks="completedTasks" :totalTasks="totalTasks" /> -->
+
+      <div class="filter-container">
+         <select class="filter-select" change="handleFilterChange($event)">
+            <option value="tasks-all">All</option>
+            <option value="tasks-checked">Checked</option>
+            <option value="tasks-unchecked">Unchecked</option>
+         </select>
+      </div>
+   </div>
+   
+   <div class="todo-list">
+      <!-- <draggable v-model="tasks" item-key="id" @end="onEnd" handle=".drag-handle"> -->
+         <!--
+         TodoListItem comments:
+         
+         Function: v-if checks if the element (current task) exists in the filteredTasks array. 
+         The .some method returns true if at least one task in filteredTasks has an id matching element.id. 
+         If true, the TodoListItem is rendered; otherwise, it is not.
+
+         `task.id === element.id`: A comparison that checks if the id of the task 
+         in filteredTasks matches the id of the current element.
+         -->
+            <!-- <TodoListItem
+               v-if="filteredTasks.some(task => task.id === element.id)"
+               :key="element.id"
+               :task="element"
+               @delete-task="deleteTask"
+               @toggle-completed="toggleCompleted"
+               @edit-task="editTask"
+               @add-task="addTask"
+               @edit-item-modal="editItemModal" /> -->
+      <!-- </draggable> -->
+      
+      <!-- Original TodoListItem component without draggable -->
+      <!-- 
+      <TodoListItem
+         v-for="task in filteredTasks"
+         :key="task.id"
+         :task="task"
+         @delete-task="deleteTask"
+         @toggle-completed="toggleCompleted"
+         @edit-task="editTask"
+         @add-task="addTask"
+         @edit-item-modal="editItemModal" />
+      -->
+
+      <!-- <TodoListItem v-for="task in tasks" :key="task.id" :task="task" /> -->
+       
+      <!--
+      :task="task"
+         This binds the current task object in the iteration to the task prop of <TodoListItem>. 
+         Each instance of <TodoListItem> will receive a task prop with the corresponding task 
+         object from the tasks array to handle clicking the edit button.
+      -->
+      <!--
+      * Original React component code
+      <TodoListItem
+         key={task.id}
+         task={task}
+         deleteTask={deleteTask}
+         toggleCompleted={toggleCompletedAnonFunc}
+         updateTask={updateTask}
+         editItemModal={editItemModal} />
+      -->
+      
+      <div class="footerButtonContainer">
+         <div class="footerButtonContainerLeft">
+            <button class="add-todo-button-footer" click="handleShow('Add', null)">Add Todo</button>
+         </div>
+         <div class="footerButtonContainerRight">
+            <button class="load-default-todos-button" value="Load Default Tasks" click="loadDefaultTasks($event)">
+               Load Default Tasks (Reset LocalStorage)
+            </button>
+         </div>
+      </div>
+   </div>
+   
+   <!-- <TodoListModal
+      v-show="showModal"
+      :addEditMode="addEditMode"
+      :task="currentTask"
+      :tasks="tasks"
+      :showModal="showModal"
+      add-task="addTask"
+      edit-task="editTask"
+      toggle-modal="toggleModalVisibility"
+   /> -->
+   <!--
+   <TodoAddItemModal
+         showModal={showModal}
+         addEditMode={addEditMode}
+         addTask={addTask}
+         updateTask={updateTask}
+         currentTaskId={currentTaskId}
+         toggleModalVisibility={toggleModalVisibility}
+   />
+   -->
+</div>
