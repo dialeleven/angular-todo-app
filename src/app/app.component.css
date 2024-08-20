@@ -1,0 +1,20 @@
+.header {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding-bottom: 10px;
+   margin: 0 auto;
+   /* border: 3px solid #be02f2; */
+}
+
+
+h1 {
+   font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+   max-width: 400px;
+   margin: 0 auto;
+   text-align: center;
+   color: #555;
+   margin-top: 15px;
+   margin-bottom: 15px;
+}
