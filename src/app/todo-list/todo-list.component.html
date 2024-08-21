@@ -1,9 +1,9 @@
-<p>todo-list works! this is in /src/app/todo/todo.component.html</p>
+<p>todo-list works?! this is in /src/app/todo/todo.component.html</p>
 <div class="container">
    <div class="header">
       <button class="top-add-todo-button" click="handleShow('Add', null)">Add Todo</button>
 
-      <!-- <TodoListHero :completedTasks="completedTasks" :totalTasks="totalTasks" /> -->
+      <app-todo-list-hero :completedTasks="completedTasks" :totalTasks="totalTasks" />
 
       <div class="filter-container">
          <select class="filter-select" change="handleFilterChange($event)">
