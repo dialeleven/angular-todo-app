@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { TodoListHeroComponent } from '../todo-list-hero/todo-list-hero.component';
+//import { TodoListModalComponent } from '../todo-list-modal/todo-list-modal.component';
+import { TodoListItemComponent } from '../todo-list-item/todo-list-item.component';
 
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [TodoListHeroComponent],
+  imports: [CommonModule, TodoListHeroComponent, TodoListItemComponent],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css'
 })

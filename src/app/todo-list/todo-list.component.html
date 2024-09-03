@@ -12,6 +12,10 @@
             <option value="tasks-unchecked">Unchecked</option>
          </select>
       </div>
+
+      <app-todo-list-item 
+        *ngFor="let task of defaultTasksList"
+        [task]="task"></app-todo-list-item>
    </div>
    
    <div class="todo-list">
