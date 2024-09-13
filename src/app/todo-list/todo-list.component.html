@@ -17,7 +17,8 @@
    <div class="todo-list">
       <app-todo-list-item 
       *ngFor="let task of filteredTasksList"
-      [task]="task"></app-todo-list-item>
+      [task]="task"
+      (taskUpdated)="handleTaskUpdate($event)"></app-todo-list-item>
       <!-- <draggable v-model="tasks" item-key="id" @end="onEnd" handle=".drag-handle"> -->
          <!--
          TodoListItem comments:

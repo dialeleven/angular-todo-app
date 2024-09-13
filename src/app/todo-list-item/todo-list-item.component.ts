@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-todo-list-item',
@@ -9,4 +9,15 @@ import { Component, Input } from '@angular/core';
 })
 export class TodoListItemComponent {
   @Input() task: any;
+  @Output() taskUpdated = new EventEmitter<any>();
+
+  // toggled completed value for the task
+  toggleCompleted() {
+     this.task.completed = !this.task.completed; // toggle completed state
+     this.taskUpdated.emit(this.task); // emit the updated task to the parent component
+  }
+  
+  handleEdit() {
+    // logic to handle editing a task
+  }
 }

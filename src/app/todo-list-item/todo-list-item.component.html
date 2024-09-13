@@ -3,7 +3,7 @@
 <div class="todo-item">
    <span class="drag-handle">☰</span>
    <div class="todo-content">
-      <input type="checkbox" [checked]="task.completed" click="toggleCompleted" />
+      <input type="checkbox" [checked]="task.completed" (click)="toggleCompleted()" />
       <div class="todo-text-container">
          <div class="todo-text">
             {{task.text}}

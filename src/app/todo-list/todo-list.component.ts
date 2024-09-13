@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodoListHeroComponent } from '../todo-list-hero/todo-list-hero.component';
-//import { TodoListModalComponent } from '../todo-list-modal/todo-list-modal.component';
 import { TodoListItemComponent } from '../todo-list-item/todo-list-item.component';
+//import { TodoListModalComponent } from '../todo-list-modal/todo-list-modal.component';
 
 @Component({
   selector: 'app-todo-list',
@@ -30,6 +30,15 @@ export class TodoListComponent {
 
   get totalTasks(): number {
     return this.defaultTasksList.length;
+  }
+
+  handleTaskUpdate(updatedTask: any) {
+    // Find the task in the list and update it
+    const taskIndex = this.defaultTasksList.findIndex(task => task.id === updatedTask.id);
+    if (taskIndex !== -1) {
+      this.defaultTasksList[taskIndex] = updatedTask; // Update the task
+      this.updateFilteredTasks(); // Re-filter the tasks if necessary
+    }
   }
 
   // method to update the filter
