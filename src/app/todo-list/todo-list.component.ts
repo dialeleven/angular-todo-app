@@ -20,4 +20,31 @@ export class TodoListComponent {
     { id: 4, text: "localStorage save/read of todo items", duedate: "", completed: false, position: 4 },
     { id: 5, text: "Drag and drop reordering of todo items", duedate: "2024-08-01 12:00", completed: false, position: 5 }
   ];
+
+  filterType: string = 'tasks-all';
+  filteredTasksList: any[] = [...this.defaultTasksList];
+
+  get completedTasks(): number {
+    return this.defaultTasksList.filter(task => task.completed).length;
+  }
+
+  get totalTasks(): number {
+    return this.defaultTasksList.length;
+  }
+
+  // method to update the filter
+  handleFilterChange(event: any) {
+    this.filterType = event.target.value;
+    this.updateFilteredTasks(); // Apply filter based on selection
+  }
+
+  updateFilteredTasks(): void {
+    if (this.filterType === 'tasks-all') {
+      this.filteredTasksList = [...this.defaultTasksList];
+    } else if (this.filterType === 'tasks-checked') {
+      this.filteredTasksList = this.defaultTasksList.filter(task => task.completed);
+    } else if (this.filterType === 'tasks-unchecked') {
+      this.filteredTasksList = this.defaultTasksList.filter(task => !task.completed);
+    }
+  }
 }

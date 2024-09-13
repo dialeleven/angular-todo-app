@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-todo-list-hero',
@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
   templateUrl: './todo-list-hero.component.html',
   styleUrl: './todo-list-hero.component.css'
 })
-export class TodoListHeroComponent {
 
+export class TodoListHeroComponent {
+  @Input() completedTasks: number = 0;
+  @Input() totalTasks: number = 0;
 }

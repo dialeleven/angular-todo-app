@@ -3,10 +3,10 @@
    <div class="header">
       <button class="top-add-todo-button" click="handleShow('Add', null)">Add Todo</button>
 
-      <app-todo-list-hero :completedTasks="completedTasks" :totalTasks="totalTasks" />
+      <app-todo-list-hero [completedTasks]="completedTasks" [totalTasks]="totalTasks" />
 
       <div class="filter-container">
-         <select class="filter-select" change="handleFilterChange($event)">
+         <select class="filter-select" (change)="handleFilterChange($event)">
             <option value="tasks-all">All</option>
             <option value="tasks-checked">Checked</option>
             <option value="tasks-unchecked">Unchecked</option>
@@ -16,7 +16,7 @@
    
    <div class="todo-list">
       <app-todo-list-item 
-      *ngFor="let task of defaultTasksList"
+      *ngFor="let task of filteredTasksList"
       [task]="task"></app-todo-list-item>
       <!-- <draggable v-model="tasks" item-key="id" @end="onEnd" handle=".drag-handle"> -->
          <!--
