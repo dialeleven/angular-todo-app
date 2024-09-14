@@ -1,1 +1,29 @@
-<p>todo-list-modal works!</p>
+   <div class="modal-backdrop" keydown.esc="handleClose" keydown.enter="handleSubmit">
+      <div class="modal" v-if="showModal">
+         <div class="modal-header">
+            <h2>addEditMode Todo</h2>
+            <button class="close-button" click="handleClose">×</button>
+         </div>
+         <div class="modal-body">
+            <input
+               type="text"
+               v-model="todoTextInput"
+               ref="todoInput"
+            />
+
+            <div class="modal-date">
+               <label>Due Date (Optional):</label>
+               <input
+                  type="datetime-local"
+                  v-model="todoDueDateInput"
+                  class="modal-date-time"
+               />
+            </div>
+         </div>
+         <div class="modal-footer">
+            <button class="modal-button" click="handleSubmit" REACTonClick={handleSubmit}>addEditMode</button>
+            <button class="modal-button-close" click="handleClose">Close</button>
+
+         </div>
+      </div>
+   </div>

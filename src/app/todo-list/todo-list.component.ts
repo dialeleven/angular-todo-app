@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodoListHeroComponent } from '../todo-list-hero/todo-list-hero.component';
 import { TodoListItemComponent } from '../todo-list-item/todo-list-item.component';
-//import { TodoListModalComponent } from '../todo-list-modal/todo-list-modal.component';
+import { TodoListModalComponent } from '../todo-list-modal/todo-list-modal.component';
 
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [CommonModule, TodoListHeroComponent, TodoListItemComponent],
+  imports: [CommonModule, TodoListHeroComponent, TodoListItemComponent, TodoListModalComponent],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css'
 })
@@ -61,5 +61,17 @@ export class TodoListComponent {
   onDeleteTask(taskId: number) {
     this.defaultTasksList = this.defaultTasksList.filter(task => task.id !== taskId);
     this.filteredTasksList = [...this.defaultTasksList]; // Update filtered list after deletion
+  }
+
+  showModal: boolean = false;
+
+  handleShowModal(action: string, task: any) {
+    console.log("Add Todo clicked");  // Debugging
+    // logic to handle showing the modal window
+    this.showModal = true;
+  }
+
+  handleCloseModal() {
+    this.showModal = false;
   }
 }

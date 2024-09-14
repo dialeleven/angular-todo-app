@@ -1,7 +1,7 @@
 <p>todo-list works?! this is in /src/app/todo/todo.component.html</p>
 <div class="container">
    <div class="header">
-      <button class="top-add-todo-button" click="handleShow('Add', null)">Add Todo</button>
+      <button class="top-add-todo-button" (click)="handleShowModal('Add', null)">Add Todo</button>
 
       <app-todo-list-hero [completedTasks]="completedTasks" [totalTasks]="totalTasks" />
 
@@ -21,6 +21,12 @@
          (taskUpdated)="handleTaskUpdate($event)"
          (deleteTask)="onDeleteTask($event)">
       </app-todo-list-item>
+
+      <app-todo-list-modal
+         *ngIf="showModal"
+         [showModal]="showModal"
+         (closeModal)="handleCloseModal()">
+      </app-todo-list-modal>
       <!-- <draggable v-model="tasks" item-key="id" @end="onEnd" handle=".drag-handle"> -->
          <!--
          TodoListItem comments:
