@@ -23,11 +23,16 @@ export class TodoListComponent {
 
   filterType: string = 'tasks-all';
   filteredTasksList: any[] = [...this.defaultTasksList];
+  selectedTask: any = null;
+  showModal: boolean = false;
+  addEditMode: string = 'Add';
 
+  // TypeScript getter method to return number of completed tasks
   get completedTasks(): number {
     return this.defaultTasksList.filter(task => task.completed).length;
   }
 
+  // TypeScript getter method to return total number of tasks
   get totalTasks(): number {
     return this.defaultTasksList.length;
   }
@@ -63,10 +68,13 @@ export class TodoListComponent {
     this.filteredTasksList = [...this.defaultTasksList]; // Update filtered list after deletion
   }
 
-  showModal: boolean = false;
-
   handleShowModal(action: string, task: any) {
-    console.log("Add Todo clicked");  // Debugging
+    console.log("Add/edit Todo clicked. Action: ", action, " Task: ", task);  // Debugging
+
+    this.addEditMode = action;
+
+    this.selectedTask = task ? { ...task } : { text: '', dueDate: '' }; // Pass task to modal for edit or empty task for add
+
     // logic to handle showing the modal window
     this.showModal = true;
   }

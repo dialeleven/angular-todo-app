@@ -1,5 +1,5 @@
    <div class="modal-backdrop" (keydown.esc)="handleClose()" (keydown.enter)="handleSubmit()">
-      <div class="modal" v-if="showModal">
+      <div class="modal" *ngIf="showModal">
          <div class="modal-header">
             <h2>{{addEditMode}} Todo</h2>
             <button class="close-button" (click)="handleClose()">×</button>

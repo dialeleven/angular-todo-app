@@ -1,16 +1,18 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-todo-list-modal',
   standalone: true,
-  imports: [FormsModule], // Include FormsModule here
+  imports: [CommonModule, FormsModule], // Include FormsModule here
   templateUrl: './todo-list-modal.component.html',
   styleUrl: './todo-list-modal.component.css'
 })
 export class TodoListModalComponent {
   @Input() showModal: boolean = false; // used to show/hide the modal
   @Input() addEditMode: string = 'Add'; // label for modal heading
+  @Input() task: any = { text: '', dueDate: '' }; // Receives the task to edit, default to empty task
   @Output() closeModal = new EventEmitter<void>(); // used to close the modal
   
   // Used to focus the input field when the modal is displayed

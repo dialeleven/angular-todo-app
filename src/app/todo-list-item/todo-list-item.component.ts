@@ -11,6 +11,7 @@ export class TodoListItemComponent {
   @Input() task: any;
   @Output() taskUpdated = new EventEmitter<any>();
   @Output() deleteTask = new EventEmitter<number>();
+  @Output() editTask = new EventEmitter<any>();
 
   // toggled completed value for the task
   toggleCompleted() {
@@ -26,6 +27,7 @@ export class TodoListItemComponent {
     // logic to handle editing a task
     console.log('handleEdit called');
 
-    // show the modal
+    // Emit the task object to the parent component
+    this.editTask.emit(this.task);
   }
 }

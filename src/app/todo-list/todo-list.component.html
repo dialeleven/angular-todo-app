@@ -19,12 +19,15 @@
          *ngFor="let task of filteredTasksList"
          [task]="task"
          (taskUpdated)="handleTaskUpdate($event)"
-         (deleteTask)="onDeleteTask($event)">
+         (deleteTask)="onDeleteTask($event)"
+         (editTask)="handleShowModal('Edit', task)">
       </app-todo-list-item>
 
       <app-todo-list-modal
          *ngIf="showModal"
          [showModal]="showModal"
+         [task]="selectedTask"
+         [addEditMode]="addEditMode"
          (closeModal)="handleCloseModal()">
       </app-todo-list-modal>
       <!-- <draggable v-model="tasks" item-key="id" @end="onEnd" handle=".drag-handle"> -->
