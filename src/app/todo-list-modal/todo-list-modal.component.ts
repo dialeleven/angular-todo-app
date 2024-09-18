@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -19,7 +19,25 @@ export class TodoListModalComponent {
   @ViewChild('todoInput') todoInput!: ElementRef; // Reference to the input field
 
   // Define todoTextInput to store the value from the input field
-  todoTextInput: string = ''; 
+  todoTextInput: string = '';
+
+  // Define todoDueDateInput to store the value from the input field
+  todoDueDateInput: string = '';
+
+  // Angular lifecycle hook triggered when the input values change.
+  // Since `addEditMode` is an input property that may change when the component
+  // is used (e.g., when the modal is opened), we use the ngOnChanges() lifecycle 
+  // hook to capture these changes. This allows updating todoTextInput and todoDueDateInput 
+  //when addEditMode changes.
+  ngOnChanges(changes: SimpleChanges) {
+    // When the modal is opened and the mode is Edit, populate the fields
+    if (changes['showModal'] && this.showModal && this.addEditMode === 'Edit') {
+      this.todoTextInput = this.task.text || '';
+      this.todoDueDateInput = this.task.duedate || '';
+
+      // console.log('task in ngAfterViewInit: ', this.task, 'addEditMode: ', this.addEditMode, 'todoDueDateInput: ', this.todoDueDateInput);
+    }
+  }
   
   // Focus the input when the modal is displayed using ngAfterViewInit() lifecycle 
   // hook in Angular. It is called after Angular has fully initialized a component's view.
