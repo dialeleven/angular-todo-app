@@ -82,4 +82,8 @@ export class TodoListComponent {
   handleCloseModal() {
     this.showModal = false;
   }
+
+  loadDefaultTasks() {
+    console.log('loadDefaultTasks called');
+  }
 }
