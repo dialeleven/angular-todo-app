@@ -37,6 +37,8 @@ export class TodoListComponent {
   }
 
   handleTaskUpdate(updatedTask: any) {
+    console.log('handleTaskUpdate called', updatedTask);
+
     // Find the task in the list and update it
     const taskIndex = this.defaultTasksList.findIndex(task => task.id === updatedTask.id);
     if (taskIndex !== -1) {
@@ -47,7 +49,7 @@ export class TodoListComponent {
 
   // Handle task submission from modal (add or edit task)
   handleTaskSubmission(task: any) {
-    // console.log('handleTaskSubmission called', task);
+    console.log('handleTaskSubmission called', task);
 
     if (this.addEditMode === 'Add') {
       task.id = this.defaultTasksList.length; // Assign an ID to the new task

@@ -25,7 +25,7 @@ export class TodoListItemComponent {
 
   handleEdit() {
     // logic to handle editing a task
-    console.log('handleEdit called');
+    console.log('handleEdit called. task.id', this.task.id);
 
     // Emit the task object to the parent component
     this.editTask.emit(this.task);
