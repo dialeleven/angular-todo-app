@@ -14,6 +14,7 @@ export class TodoListModalComponent {
   @Input() addEditMode: string = 'Add'; // label for modal heading
   @Input() task: any = { text: '', dueDate: '' }; // Receives the task to edit, default to empty task
   @Output() closeModal = new EventEmitter<void>(); // used to close the modal
+  @Output() taskSubmitted = new EventEmitter<any>(); // emit the task on submit
   
   // Used to focus the input field when the modal is displayed
   @ViewChild('todoInput') todoInput!: ElementRef; // Reference to the input field
@@ -50,11 +51,19 @@ export class TodoListModalComponent {
   }
 
   handleClose() {
-    this.closeModal.emit(); // emit close modal event
+    this.closeModal.emit(); // emit close modal event to parent component
   }
 
+  // handle modal form submission for add/edit actions
   handleSubmit() {
-    // logic to handle submitting the form
-    console.log('handleSubmit called');
+
+    // Prepare the task object
+    const task = {
+      text: this.todoTextInput,
+      duedate: this.todoDueDateInput
+    };
+
+    this.taskSubmitted.emit(task); // Emit task to parent component
+    this.handleClose(); // Close the modal after submission
   }
 }

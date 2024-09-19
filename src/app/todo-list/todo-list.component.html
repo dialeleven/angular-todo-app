@@ -28,7 +28,8 @@
          [showModal]="showModal"
          [task]="selectedTask"
          [addEditMode]="addEditMode"
-         (closeModal)="handleCloseModal()">
+         (closeModal)="handleCloseModal()"
+         (taskSubmitted)="handleTaskSubmission($event)">
       </app-todo-list-modal>
       <!-- <draggable v-model="tasks" item-key="id" @end="onEnd" handle=".drag-handle"> -->
          <!--

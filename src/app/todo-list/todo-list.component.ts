@@ -13,9 +13,8 @@ import { TodoListModalComponent } from '../todo-list-modal/todo-list-modal.compo
 })
 export class TodoListComponent {
   defaultTasksList: any[] = [
-    { id: 0, text: "Update checkbox state for completed todo items", duedate: "2099-01-01 12:00", completed: true, position: 0 },
     { id: 1, text: "Edit item - watch out for long text lines that wrap", duedate: "2099-01-01 12:00", completed: false, position: 1 },
-    { id: 2, text: "Add todo item", duedate: "", completed: false, position: 2 },
+    { id: 2, text: "Add todo item", duedate: "", completed: true, position: 2 },
     { id: 3, text: "Delete todo item", duedate: "", completed: true, position: 3 },
     { id: 4, text: "localStorage save/read of todo items", duedate: "", completed: false, position: 4 },
     { id: 5, text: "Drag and drop reordering of todo items", duedate: "2024-08-01 12:00", completed: false, position: 5 }
@@ -44,6 +43,20 @@ export class TodoListComponent {
       this.defaultTasksList[taskIndex] = updatedTask; // Update the task
       this.updateFilteredTasks(); // Re-filter the tasks if necessary
     }
+  }
+
+  // Handle task submission from modal (add or edit task)
+  handleTaskSubmission(task: any) {
+    // console.log('handleTaskSubmission called', task);
+
+    if (this.addEditMode === 'Add') {
+      task.id = this.defaultTasksList.length; // Assign an ID to the new task
+      this.defaultTasksList.push(task); // Add new task
+    } else if (this.addEditMode === 'Edit') {
+      this.handleTaskUpdate(task); // Update existing task
+    }
+    this.showModal = false; // Close modal after submission
+    this.updateFilteredTasks(); // Update filtered tasks after submission
   }
 
   // method to update the filter
