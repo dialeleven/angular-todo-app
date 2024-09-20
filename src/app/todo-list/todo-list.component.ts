@@ -43,7 +43,7 @@ export class TodoListComponent {
     const taskIndex = this.defaultTasksList.findIndex(task => task.id === updatedTask.id);
     if (taskIndex !== -1) {
       this.defaultTasksList[taskIndex] = updatedTask; // Update the task
-      this.updateFilteredTasks(); // Re-filter the tasks if necessary
+      // this.updateFilteredTasks(); // Re-filter the tasks if necessary
     }
   }
 
