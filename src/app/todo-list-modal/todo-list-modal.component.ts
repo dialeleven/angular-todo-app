@@ -37,7 +37,7 @@ export class TodoListModalComponent {
     if (changes['showModal'] && this.showModal && this.addEditMode === 'Edit') {
       this.todoTextInput = this.task.text || '';
       this.todoDueDateInput = this.task.duedate || '';
-      this.todoCompleted = this.task.completed || false;
+      this.todoCompleted = this.task.completed || false; // keep track of completed state
 
       // console.log('task in ngAfterViewInit: ', this.task, 'addEditMode: ', this.addEditMode, 'todoDueDateInput: ', this.todoDueDateInput);
     }
