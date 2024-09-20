@@ -59,6 +59,7 @@ export class TodoListModalComponent {
 
     // Prepare the task object
     const task = {
+      id: this.task.id,
       text: this.todoTextInput,
       duedate: this.todoDueDateInput
     };
