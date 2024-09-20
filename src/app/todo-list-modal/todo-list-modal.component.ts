@@ -25,6 +25,8 @@ export class TodoListModalComponent {
   // Define todoDueDateInput to store the value from the input field
   todoDueDateInput: string = '';
 
+  todoCompleted: boolean = false;
+
   // Angular lifecycle hook triggered when the input values change.
   // Since `addEditMode` is an input property that may change when the component
   // is used (e.g., when the modal is opened), we use the ngOnChanges() lifecycle 
@@ -35,6 +37,7 @@ export class TodoListModalComponent {
     if (changes['showModal'] && this.showModal && this.addEditMode === 'Edit') {
       this.todoTextInput = this.task.text || '';
       this.todoDueDateInput = this.task.duedate || '';
+      this.todoCompleted = this.task.completed || false;
 
       // console.log('task in ngAfterViewInit: ', this.task, 'addEditMode: ', this.addEditMode, 'todoDueDateInput: ', this.todoDueDateInput);
     }
@@ -61,7 +64,8 @@ export class TodoListModalComponent {
     const task = {
       id: this.task.id,
       text: this.todoTextInput,
-      duedate: this.todoDueDateInput
+      duedate: this.todoDueDateInput,
+      completed: this.todoCompleted
     };
 
     this.taskSubmitted.emit(task); // Emit task to parent component
