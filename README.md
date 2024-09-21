@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.0.
 
-This TODO app was built originally in React (https://github.com/dialeleven/react-todo-app-medium), then ported to Vue (https://github.com/dialeleven/vue) and finally an Angular version here.
+This TODO app was built originally in React (https://github.com/dialeleven/react-todo-app-medium), then ported to Vue (https://github.com/dialeleven/vue), and finally an Angular version to cover the frontend JavaScript library/framework trifecta.
 
 ## Development server
 
