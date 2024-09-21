@@ -90,7 +90,7 @@
             <button class="add-todo-button-footer" (click)="handleShowModal('Add', null)">Add Todo</button>
          </div>
          <div class="footerButtonContainerRight">
-            <button class="load-default-todos-button" value="Load Default Tasks" (click)="loadDefaultTasks()">
+            <button class="load-default-todos-button" value="Load Default Tasks" (click)="loadDefaultTasks($event)">
                Load Default Tasks (Reset LocalStorage)
             </button>
          </div>

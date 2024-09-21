@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
 import { TodoListHeroComponent } from '../todo-list-hero/todo-list-hero.component';
 import { TodoListItemComponent } from '../todo-list-item/todo-list-item.component';
 import { TodoListModalComponent } from '../todo-list-modal/todo-list-modal.component';
@@ -12,6 +13,9 @@ import { TodoListModalComponent } from '../todo-list-modal/todo-list-modal.compo
   styleUrl: './todo-list.component.css'
 })
 export class TodoListComponent {
+  // Initialize the tasks as a BehaviorSubject with an empty array as default value
+  tasks = new BehaviorSubject<any[]>([]);
+    
   defaultTasksList: any[] = [
     { id: 1, text: "Edit item - watch out for long text lines that wrap", duedate: "2099-01-01 12:00", completed: true, position: 1 },
     { id: 2, text: "Add todo item", duedate: "", completed: true, position: 2 },
@@ -98,7 +102,33 @@ export class TodoListComponent {
     this.showModal = false;
   }
 
-  loadDefaultTasks() {
-    console.log('loadDefaultTasks called');
+  loadDefaultTasks(event: any) {
+    // Confirm if the user wants to load default tasks.
+    if (event && !confirm('Load default tasks?')) {
+      console.log('not confirmed');
+      return false;
+    }
+
+    console.log('loadDefaultTasks called. event: ', event);
+
+    // Define default tasks
+    const defaultTasks = [
+      { id: 1, text: "Edit item - watch out for long text lines that wrap", duedate: "2099-01-01 12:00", completed: true, position: 1 },
+      { id: 2, text: "Add todo item", duedate: "", completed: true, position: 2 },
+      { id: 3, text: "Delete todo item", duedate: "", completed: true, position: 3 },
+      { id: 4, text: "localStorage save/read of todo items", duedate: "", completed: false, position: 4 },
+      { id: 5, text: "Drag and drop reordering of todo items", duedate: "2024-08-01 12:00", completed: false, position: 5 }
+    ];
+
+    // Save to localStorage
+    localStorage.setItem('tasks', JSON.stringify(defaultTasks));
+
+    // Update observable tasks (if using an observable like BehaviorSubject)
+    this.tasks.next(defaultTasks);
+
+    // Update the filtered task list for UI rendering
+    this.filteredTasksList = defaultTasks;
+
+    return defaultTasks;
   }
 }
