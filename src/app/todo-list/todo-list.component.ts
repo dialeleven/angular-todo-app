@@ -104,7 +104,7 @@ export class TodoListComponent {
     console.log('handleTaskSubmission called', task);
 
     if (this.addEditMode === 'Add') {
-      task.id = this.defaultTasksList.length; // Assign an ID to the new task
+      task.id = this.defaultTasksList.length + 1; // Assign an ID to the new task
       //task.id = this.defaultTasksList.length > 0 ? Math.max(...this.defaultTasksList.map(t => t.id)) + 1 : 1; // Generate a new ID
       this.defaultTasksList.push(task); // Add new task
     } else if (this.addEditMode === 'Edit') {
