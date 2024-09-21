@@ -14,14 +14,21 @@
       </div>
    </div>
    
-   <div class="todo-list">
-      <app-todo-list-item 
-         *ngFor="let task of filteredTasksList"
-         [task]="task"
-         (taskUpdated)="handleTaskUpdate($event)"
-         (deleteTask)="onDeleteTask($event)"
-         (editTask)="handleShowModal('Edit', task)">
-      </app-todo-list-item>
+   <div class="todo-list"
+      cdkDropList
+      (cdkDropListDropped)="drop($event)">
+
+      <div *ngFor="let task of filteredTasksList; let i = index"
+         cdkDrag
+         class="todo-item">
+
+         <app-todo-list-item 
+            [task]="task"
+            (taskUpdated)="handleTaskUpdate($event)"
+            (deleteTask)="onDeleteTask($event)"
+            (editTask)="handleShowModal('Edit', task)">
+         </app-todo-list-item>
+      </div>
 
       <app-todo-list-modal
          *ngIf="showModal"

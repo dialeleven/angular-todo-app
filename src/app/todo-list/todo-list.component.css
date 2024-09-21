@@ -35,7 +35,7 @@ input[type="checkbox"] {
 }
 
 
-.todo-item {
+.todo-item-old {
    display: flex;
    align-items: center;
    padding: 12px;
@@ -44,6 +44,25 @@ input[type="checkbox"] {
    border-radius: 4px;
    margin-bottom: 8px;
    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ }
+
+ 
+ .todo-item {
+   cursor: move;
+   overflow-y: hidden;
+ }
+
+
+.cdk-drag-preview {
+   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+ }
+ 
+ .cdk-drag-placeholder {
+   opacity: 0;
+ }
+ 
+ .cdk-drag-animating {
+   transition: transform 250ms ease;
  }
 
 

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TodoListHeroComponent } from '../todo-list-hero/todo-list-hero.component';
 import { TodoListItemComponent } from '../todo-list-item/todo-list-item.component';
 import { TodoListModalComponent } from '../todo-list-modal/todo-list-modal.component';
@@ -8,7 +10,7 @@ import { TodoListModalComponent } from '../todo-list-modal/todo-list-modal.compo
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [CommonModule, TodoListHeroComponent, TodoListItemComponent, TodoListModalComponent],
+  imports: [CommonModule, DragDropModule, TodoListHeroComponent, TodoListItemComponent, TodoListModalComponent],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css'
 })
@@ -32,6 +34,17 @@ export class TodoListComponent {
 
   currentCompletedTasks: number = 0;
   currentTotalTasks: number = 0;
+
+  drop(event: CdkDragDrop<any[]>) {
+    // Move item in the array
+    moveItemInArray(this.filteredTasksList, event.previousIndex, event.currentIndex);
+    
+    // If you need to update the original list (defaultTasksList) too:
+    moveItemInArray(this.defaultTasksList, event.previousIndex, event.currentIndex);
+
+    // You can also update the task position or save the reordered list to localStorage if needed
+    localStorage.setItem('tasks', JSON.stringify(this.defaultTasksList));
+  }
 
   // TypeScript getter method to return number of completed tasks
   get completedTasks(): number {
