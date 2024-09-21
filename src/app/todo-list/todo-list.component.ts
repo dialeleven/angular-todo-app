@@ -94,6 +94,9 @@ export class TodoListComponent {
       this.updateFilteredTasks(); // Re-filter the tasks if necessary
       this.updateTaskCounts(this.defaultTasksList); // Update task counts after change
     }
+
+    // Save to localStorage
+    localStorage.setItem('tasks', JSON.stringify(this.defaultTasksList));
   }
 
   // Handle task submission from modal (add or edit task)
