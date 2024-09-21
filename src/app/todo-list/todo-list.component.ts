@@ -32,7 +32,6 @@ export class TodoListComponent {
 
   currentCompletedTasks: number = 0;
   currentTotalTasks: number = 0;
-  maxId: number = 0; // Initialize as needed
 
   // TypeScript getter method to return number of completed tasks
   get completedTasks(): number {
@@ -80,6 +79,7 @@ export class TodoListComponent {
 
     if (this.addEditMode === 'Add') {
       task.id = this.defaultTasksList.length; // Assign an ID to the new task
+      //task.id = this.defaultTasksList.length > 0 ? Math.max(...this.defaultTasksList.map(t => t.id)) + 1 : 1; // Generate a new ID
       this.defaultTasksList.push(task); // Add new task
     } else if (this.addEditMode === 'Edit') {
       this.handleTaskUpdate(task); // Update existing task
@@ -90,7 +90,6 @@ export class TodoListComponent {
     
     // Save to localStorage
     localStorage.setItem('tasks', JSON.stringify(this.filteredTasksList));
-    
   }
 
   // method to update the filter
@@ -111,8 +110,14 @@ export class TodoListComponent {
 
   // Method to handle the delete event from the child component
   onDeleteTask(taskId: number) {
+    // Remove the task from the list
     this.defaultTasksList = this.defaultTasksList.filter(task => task.id !== taskId);
-    this.filteredTasksList = [...this.defaultTasksList]; // Update filtered list after deletion
+
+    // Update the filtered list based on the current filter type
+    this.updateFilteredTasks();
+    //this.filteredTasksList = [...this.defaultTasksList];
+
+    // Update task counts
     this.updateTaskCounts(this.defaultTasksList); // Update task counts after deletion
 
     // Save to localStorage
@@ -145,11 +150,11 @@ export class TodoListComponent {
 
     // Define default tasks
     const defaultTasks = [
-      { id: this.maxId + 1, text: "Edit item - watch out for long text lines that wrap", duedate: "2099-01-01 12:00", completed: true, position: 1 },
-      { id: this.maxId + 2, text: "Add todo item", duedate: "", completed: true, position: 2 },
-      { id: this.maxId + 3, text: "Delete todo item", duedate: "", completed: true, position: 3 },
-      { id: this.maxId + 4, text: "localStorage save/read of todo items", duedate: "", completed: false, position: 4 },
-      { id: this.maxId + 5, text: "Drag and drop reordering of todo items", duedate: "2024-08-01 12:00", completed: false, position: 5 }
+      { id: 1, text: "Edit item - watch out for long text lines that wrap", duedate: "2099-01-01 12:00", completed: true, position: 1 },
+      { id: 2, text: "Add todo item", duedate: "", completed: true, position: 2 },
+      { id: 3, text: "Delete todo item", duedate: "", completed: true, position: 3 },
+      { id: 4, text: "localStorage save/read of todo items", duedate: "", completed: false, position: 4 },
+      { id: 5, text: "Drag and drop reordering of todo items", duedate: "2024-08-01 12:00", completed: false, position: 5 }
     ];
 
     // Update defaultTasksList with new tasks
