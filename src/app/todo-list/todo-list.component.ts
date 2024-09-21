@@ -35,6 +35,15 @@ export class TodoListComponent {
   currentCompletedTasks: number = 0;
   currentTotalTasks: number = 0;
 
+  /**
+   * Handles the reordering of tasks after a drag-and-drop operation.
+   * 
+   * - Uses the CdkDragDrop event to capture the previous and current positions of the dragged task.
+   * - The moveItemInArray function updates the position of the dragged task in both the filtered and default task lists.
+   * - Optionally persists the updated task order to localStorage to retain changes after a page reload.
+   *
+   * @param event - The drag-and-drop event containing details about the dragged item and its new position.
+   */
   drop(event: CdkDragDrop<any[]>) {
     // Move item in the array
     moveItemInArray(this.filteredTasksList, event.previousIndex, event.currentIndex);
@@ -58,6 +67,7 @@ export class TodoListComponent {
     // return this.defaultTasksList.length;
   }
 
+  // set up initial task values from localStorage or default tasks
   constructor() {
     // check if tasks exist in localStorage
     const storedTasks = localStorage.getItem('tasks');
