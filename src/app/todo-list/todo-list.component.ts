@@ -30,14 +30,36 @@ export class TodoListComponent {
   showModal: boolean = false;
   addEditMode: string = 'Add';
 
+  currentCompletedTasks: number = 0;
+  currentTotalTasks: number = 0;
+  maxId: number = 0; // Initialize as needed
+
   // TypeScript getter method to return number of completed tasks
   get completedTasks(): number {
-    return this.defaultTasksList.filter(task => task.completed).length;
+    return this.currentCompletedTasks;
+    // return this.defaultTasksList.filter(task => task.completed).length;
   }
 
   // TypeScript getter method to return total number of tasks
   get totalTasks(): number {
-    return this.defaultTasksList.length;
+    return this.currentTotalTasks;
+    // return this.defaultTasksList.length;
+  }
+
+  constructor() {
+    // check if tasks exist in localStorage
+    const storedTasks = localStorage.getItem('tasks');
+
+    if (storedTasks) {
+      this.defaultTasksList = JSON.parse(storedTasks); // Load tasks from localStorage
+    } else {
+        // If no tasks in localStorage, use the default tasks
+        this.defaultTasksList = [...this.defaultTasksList]; // Use predefined default tasks
+    }
+
+    // Initialize the filtered tasks list and task counts
+    this.filteredTasksList = [...this.defaultTasksList];
+    this.updateTaskCounts(this.defaultTasksList);  // Initialize task counts
   }
 
   handleTaskUpdate(updatedTask: any) {
@@ -47,7 +69,8 @@ export class TodoListComponent {
     const taskIndex = this.defaultTasksList.findIndex(task => task.id === updatedTask.id);
     if (taskIndex !== -1) {
       this.defaultTasksList[taskIndex] = updatedTask; // Update the task
-      // this.updateFilteredTasks(); // Re-filter the tasks if necessary
+      this.updateFilteredTasks(); // Re-filter the tasks if necessary
+      this.updateTaskCounts(this.defaultTasksList); // Update task counts after change
     }
   }
 
@@ -63,6 +86,11 @@ export class TodoListComponent {
     }
     this.showModal = false; // Close modal after submission
     this.updateFilteredTasks(); // Update filtered tasks after submission
+    this.updateTaskCounts(this.defaultTasksList); // Update task counts after submission
+    
+    // Save to localStorage
+    localStorage.setItem('tasks', JSON.stringify(this.filteredTasksList));
+    
   }
 
   // method to update the filter
@@ -85,6 +113,10 @@ export class TodoListComponent {
   onDeleteTask(taskId: number) {
     this.defaultTasksList = this.defaultTasksList.filter(task => task.id !== taskId);
     this.filteredTasksList = [...this.defaultTasksList]; // Update filtered list after deletion
+    this.updateTaskCounts(this.defaultTasksList); // Update task counts after deletion
+
+    // Save to localStorage
+    localStorage.setItem('tasks', JSON.stringify(this.filteredTasksList));
   }
 
   handleShowModal(action: string, task: any) {
@@ -113,12 +145,15 @@ export class TodoListComponent {
 
     // Define default tasks
     const defaultTasks = [
-      { id: 1, text: "Edit item - watch out for long text lines that wrap", duedate: "2099-01-01 12:00", completed: true, position: 1 },
-      { id: 2, text: "Add todo item", duedate: "", completed: true, position: 2 },
-      { id: 3, text: "Delete todo item", duedate: "", completed: true, position: 3 },
-      { id: 4, text: "localStorage save/read of todo items", duedate: "", completed: false, position: 4 },
-      { id: 5, text: "Drag and drop reordering of todo items", duedate: "2024-08-01 12:00", completed: false, position: 5 }
+      { id: this.maxId + 1, text: "Edit item - watch out for long text lines that wrap", duedate: "2099-01-01 12:00", completed: true, position: 1 },
+      { id: this.maxId + 2, text: "Add todo item", duedate: "", completed: true, position: 2 },
+      { id: this.maxId + 3, text: "Delete todo item", duedate: "", completed: true, position: 3 },
+      { id: this.maxId + 4, text: "localStorage save/read of todo items", duedate: "", completed: false, position: 4 },
+      { id: this.maxId + 5, text: "Drag and drop reordering of todo items", duedate: "2024-08-01 12:00", completed: false, position: 5 }
     ];
+
+    // Update defaultTasksList with new tasks
+    this.defaultTasksList = defaultTasks;
 
     // Save to localStorage
     localStorage.setItem('tasks', JSON.stringify(defaultTasks));
@@ -129,6 +164,15 @@ export class TodoListComponent {
     // Update the filtered task list for UI rendering
     this.filteredTasksList = defaultTasks;
 
+    // Update task counts after deletion
+    this.updateTaskCounts(this.defaultTasksList);
+
     return defaultTasks;
+  }
+
+  // Helper method to update task counts
+  updateTaskCounts(tasks: any[]) {
+    this.currentTotalTasks = tasks.length;
+    this.currentCompletedTasks = tasks.filter(task => task.completed).length;
   }
 }
