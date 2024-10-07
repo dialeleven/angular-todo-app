@@ -1,0 +1,27 @@
+body {
+   font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+   background-color: #cce8f3;
+}
+
+.container {
+   width: 450px;
+   border: 3px solid #ccc;
+   background-color: #fff;
+   border-radius: 5px;
+   margin: auto; /* center the container horizontally */
+   padding: 0 15px 15px 15px;
+}
+
+textarea, input {
+   font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+input[type="checkbox"] {
+   transform: scale(1.5);
+   margin-right: 10px;
+   cursor: pointer;
+}
+
+label[for="show_todo_controls_on_bottom"] {
+   cursor: pointer;
+}
