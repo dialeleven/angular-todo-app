@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-// import { RouterOutlet } from '@angular/router';
-import { provideRouter, RouterModule } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { TodoListComponent } from './todo-list/todo-list.component';
 
@@ -9,7 +9,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
   standalone: true,
   imports: [RouterModule, TodoListComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'angular-todo-app';
