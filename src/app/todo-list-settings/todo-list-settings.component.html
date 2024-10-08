@@ -3,7 +3,7 @@
 
    <!-- <p>todo-list-settings works!</p> -->
 
-   <input type="checkbox" id="show_todo_controls_on_bottom">
+   <input type="checkbox" id="show_todo_controls_on_bottom" [checked]="showAddTodoButtonBottom" (change)="toggleShowTodoControlsOnBottom()">
    <label for="show_todo_controls_on_bottom">Show "Add Todo" button on bottom of list</label>
    
    <div class="back-to-todo" style="margin-top: 15px;">
