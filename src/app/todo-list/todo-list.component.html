@@ -94,7 +94,7 @@
       
       <div class="footerButtonContainer">
          <div class="footerButtonContainerLeft">
-            <button class="add-todo-button-footer" (click)="handleShowModal('Add', null)">Add Todo</button>
+            <button *ngIf="showAddTodoButtonBottom" class="add-todo-button-footer" (click)="handleShowModal('Add', null)">Add Todo</button>
          </div>
          <div class="footerButtonContainerRight">
             <button class="load-default-todos-button" value="Load Default Tasks" (click)="loadDefaultTasks($event)">

@@ -15,6 +15,9 @@ import { TodoListModalComponent } from '../todo-list-modal/todo-list-modal.compo
   styleUrl: './todo-list.component.css'
 })
 export class TodoListComponent {
+  // App settings - show add todo button on bottom
+  showAddTodoButtonBottom: boolean = false;
+
   // Initialize the tasks as a BehaviorSubject with an empty array as default value
   tasks = new BehaviorSubject<any[]>([]);
     
@@ -71,6 +74,7 @@ export class TodoListComponent {
   constructor() {
     // check if tasks exist in localStorage
     const storedTasks = localStorage.getItem('tasks');
+    const storedButtonSetting = localStorage.getItem('showTodoControlsOnBottom');
 
     if (storedTasks) {
       this.defaultTasksList = JSON.parse(storedTasks); // Load tasks from localStorage
@@ -82,8 +86,32 @@ export class TodoListComponent {
     // Initialize the filtered tasks list and task counts
     this.filteredTasksList = [...this.defaultTasksList];
     this.updateTaskCounts(this.defaultTasksList);  // Initialize task counts
+
+    // Initialize `showAddTodoButtonBottom` from localStorage
+    if (storedButtonSetting) {
+      this.showAddTodoButtonBottom = storedButtonSetting === 'true';
+    }
   }
 
+  // on component initialization, load settings from local storage
+  ngOnInit() {
+    window.addEventListener('storage', this.syncSettingsFromLocalStorage.bind(this));
+  }
+
+  // Helper method to sync settings from local storage
+  syncSettingsFromLocalStorage() {
+    const storedButtonSetting = localStorage.getItem('showTodoControlsOnBottom');
+    if (storedButtonSetting) {
+      this.showAddTodoButtonBottom = storedButtonSetting === 'true';
+    }
+  }
+
+  // on component destruction, remove settings from local storage
+  ngOnDestroy() {
+    window.removeEventListener('storage', this.syncSettingsFromLocalStorage);
+  }
+
+  // Handle task update from modal
   handleTaskUpdate(updatedTask: any) {
     console.log('handleTaskUpdate called', updatedTask);
 
