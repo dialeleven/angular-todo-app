@@ -4,6 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This TODO app was built originally in React (https://github.com/dialeleven/react-todo-app-medium), then ported to Vue (https://github.com/dialeleven/vue), and finally an Angular version to cover the frontend JavaScript library/framework trifecta.
 
+The Angular version adds one additional feature not currently present in the React and Vue apps which is routing. A simple route for the "/settings" page has been added to demonstrate the routing functionality within Angular.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
