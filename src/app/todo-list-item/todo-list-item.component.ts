@@ -19,8 +19,11 @@ export class TodoListItemComponent {
     this.taskUpdated.emit(this.task); // emit the updated task to the parent component
   }
 
+  // logic to handle deleting a task
   handleDelete() {
-    this.deleteTask.emit(this.task.id); // Emit the task's ID to the parent component
+    if (window.confirm(`Delete todo: ${this.task.text}?`)) {
+      this.deleteTask.emit(this.task.id); // Emit the task's ID to the parent component
+    }
   }
 
   handleEdit() {
